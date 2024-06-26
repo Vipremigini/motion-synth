@@ -1,12 +1,21 @@
 let monoSynth;
 let i = 0;
+let font;
+const notes = ["A3", "C4" ,"D4", "D4", "D4", "E4", "F4", "F4", "F4" ,"G4", "E4", "E4", "D4", "C4", "C4", "D4"]
+let num = 0
 
-
+function preload() {
+  // Creates a p5.Font object.
+  font = loadFont('Swansea-q3pd.ttf');
+}
+function adder() {
+  num = num + 1
+}
 
 function setup() {
-  let cnv = createCanvas(100, 100, WEBGL);
- cnv.mousePressed(playSynth);
-
+  let cnv = createCanvas(500, 500, WEBGL);
+ cnv.mousePressed(adder);
+textFont(font);
   fill('yellow');
   textAlign(CENTER);
   text(accelerationX + accelerationY + accelerationZ , width/2, height/2);
@@ -16,14 +25,16 @@ function setup() {
 
 function playSynth() {
   userStartAudio();
-  let note = random(['Fb4', 'G4']);
-  let velocity = accelerationX + accelerationY + accelerationZ;
+  
+  let note = notes[num];
+  let velocity = 1;
  let time = 0;
-  let dur = 1/6;
+  let dur = 1
+  ;
 
   monoSynth.play(note, velocity, time, dur);
 }
 
 function draw() {
-  background(0,0,0);
-  text(accelerationX + accelerationY + accelerationZ, 0, 0);}
+  playSynth()
+}
