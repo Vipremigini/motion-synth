@@ -23,18 +23,18 @@ textFont(font);
   monoSynth = new p5.MonoSynth();
 }
 
-function playSynth() {
+function playSynth(x) {
   userStartAudio();
   
   let note = notes[num];
-  let velocity = 1;
+  let velocity = x;
  let time = 0;
-  let dur = 1
-  ;
+  let dur = 1/100;
 
   monoSynth.play(note, velocity, time, dur);
 }
 
 function draw() {
-  playSynth()
+  background(0,0,0)
+  playSynth(abs((accelerationX) + abs(accelerationY)) / 90)
 }
